@@ -1,0 +1,16 @@
+# Core AI / data
+groq==1.7.0
+datasets==5.0.1
+pandas==3.0.5
+pyarrow==25.0.1
+
+# Schema & config
+pydantic==2.13.5
+python-dotenv==1.2.3
+
+# Web server
+fastapi==0.165.0
+uvicorn[standard]==0.52.4
+
+# CLI output (used by data/loader.py and engine/recommender.py)
+rich==15.0.0
