@@ -86,12 +86,6 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
     else:
         cleaned["cost_for_two"] = None
         
-    # 14. reviews (reviews_list)
-    cleaned["reviews"] = df["reviews_list"]
-    
-    # 15. menu_items (menu_item)
-    cleaned["menu_items"] = df["menu_item"]
-    
     # 16. listing_type (listed_in(type))
     if "listed_in(type)" in df.columns:
         cleaned["listing_type"] = df["listed_in(type)"].astype(str).str.strip()
@@ -134,7 +128,13 @@ def load_and_clean_data(refresh: bool = False) -> pd.DataFrame:
     console.print("[cyan]Downloading dataset from Hugging Face (ManikaSaini/zomato-restaurant-recommendation)...[/cyan]")
     dataset = load_dataset("ManikaSaini/zomato-restaurant-recommendation", split="train")
     df = dataset.to_pandas()
-    
+
+    # Drop large columns that are never used by the filter or recommendation engine.
+    # reviews_list alone adds ~90MB; dropping both before clean_data() halves peak
+    # memory usage (original df + cleaned df exist simultaneously during processing),
+    # which prevents OOM kills on Railway's free tier.
+    df = df.drop(columns=["reviews_list", "menu_item"], errors="ignore")
+
     cleaned_df = clean_data(df)
     
     console.print(f"[yellow]Saving cleaned dataset to cache at {cache_path}...[/yellow]")
