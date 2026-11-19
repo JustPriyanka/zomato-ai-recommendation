@@ -39,7 +39,7 @@ In Railway → your service → Variables tab, add:
 | Variable | Value | Notes |
 |---|---|---|
 | `GROQ_API_KEY` | `gsk_...` | From [console.groq.com/keys](https://console.groq.com/keys) |
-| `GROQ_MODEL` | `openai/gpt-oss-120b` | Or any Groq model you prefer |
+| `GROQ_MODEL` | `llama-3.3-70b-versatile` | Or any Groq model you prefer |
 | `MAX_CANDIDATES` | `20` | Max restaurants passed to LLM |
 | `TOP_K` | `5` | Recommendations returned |
 | `ALLOWED_ORIGINS` | *(leave blank for now — add Vercel URL after Step 2)* | Comma-separated frontend URLs |

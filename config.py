@@ -9,7 +9,7 @@ load_dotenv()
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 # App Configuration
-GROQ_MODEL = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
+GROQ_MODEL = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
 MAX_CANDIDATES = int(os.getenv("MAX_CANDIDATES", "20"))
 TOP_K = int(os.getenv("TOP_K", "5"))
 
